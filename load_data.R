@@ -37,6 +37,8 @@ load_data <- function(cache = TRUE) {
         dt <- filter(dt, date >= start_date & date <= end_date)
         # add date_time
         dt$date_time <- with(dt, ymd(dt$date) + hms(dt$time))
+        # remove date and time columns
+        dt <- select(dt, date_time, global_active_power:sub_metering_3)
         # save data table cache 
         saveRDS(dt, tidy_file)
     }
